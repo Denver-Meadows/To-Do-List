@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Denver-Meadows/To-Do-List#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "parcel": "*"
   }
 }
