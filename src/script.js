@@ -13,18 +13,23 @@ const state = {
 
 const completeToDo = function(btn) {
   btn.parentNode.classList.toggle('line-through');
-  state.completedToDo.push(btn.closest('.todo__text'));
-
+  // state.completedToDo.push(btn.closest('.todo__text'));  ***NOT WORKING
 };
 
-const editToDo = function() {
-
+const editToDo = function(btn) {
+  console.log(btn.parentElement.innerText) // Get the text from LI
+  // Open a new input box with save and close button
 };
 
-const deleteToDo = function() {
+const deleteToDo = function(btn) {
+  btn.parentElement.remove();
+  const removedToDo = btn.parentNode.innerText.trim()
 
+  // Remove todo from state
+  state.todos = state.todos.filter(item => item !== removedToDo)
 };
 
+// Add new todo
 addToDoBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const value = document.querySelector('.todo__form__input').value
@@ -34,11 +39,12 @@ addToDoBtn.addEventListener('click', (e) => {
   document.querySelector('.todo__form__input').value = ''
 });
 
+// Event bubbling for todo buttons
 todoList.addEventListener('click', (e) => {
   const btn = e.target.closest('button')
   if (!btn) return;
-  if (btn.classList.contains('todo__delete')) console.log('delete that');
-  if (btn.classList.contains('todo__edit')) console.log('edit that');
+  if (btn.classList.contains('todo__delete')) deleteToDo(btn);
+  if (btn.classList.contains('todo__edit')) editToDo(btn);
   if (btn.classList.contains('todo__complete')) completeToDo(btn);
 });
 
