@@ -8,8 +8,84 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: rgb(233, 165, 116);
 }
 
-/* .todo__list li {
-  display: inline;
-} */
+.todo__header {
+  display: flex;
+  justify-content: center;
+}
+
+.todo__header__headline {
+  font-size: 4rem;
+  color: aliceblue;
+  margin: 1rem;
+  padding: 2rem;
+  transition: all 3s ease;
+}
+
+.todo__header__headline:hover {
+  transform: scale(1.2);
+}
+
+.todo__form__main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo__form__components {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.todo__form__components input {
+  padding: .3rem;
+  width: 16rem;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  padding-left: .5rem;
+}
+
+.todo__form__components button {
+  margin-right: 1rem;
+  padding: .2rem;
+}
+
+.todo__dropdown__list {
+  width: 7rem;
+}
+
+.todo__list li {
+  list-style: none;
+  background-color: aliceblue;
+  width: 25rem;
+  margin-bottom: .5rem;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  padding-left: .5rem;
+}
+
+.todo__button {
+  float: right;
+  padding: .6rem .5rem;
+  border-radius: 0;
+  color: aliceblue;
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+  height: 100%;
+}
+
+.todo__complete {
+  background-color: rgb(63, 201, 63);
+}
+
+.todo__delete {
+  background-color: red;
+}
+
+.todo__edit {
+  background-color: rgb(97, 138, 199);
+}
