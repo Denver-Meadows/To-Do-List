@@ -1,0 +1,22 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "Simple To-Do CRUD App",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Denver-Meadows/To-Do-List.git"
+  },
+  "author": "Denver Meadows",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Denver-Meadows/To-Do-List/issues"
+  },
+  "homepage": "https://github.com/Denver-Meadows/To-Do-List#readme",
+  "devDependencies": {
+    "parcel": "*"
+  }
+}
