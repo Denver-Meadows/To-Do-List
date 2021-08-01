@@ -95,3 +95,7 @@ body {
 .todo__edit {
   background-color: rgb(97, 138, 199);
 }
+
+.line-through {
+  text-decoration: line-through;
+}
