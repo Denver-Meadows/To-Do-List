@@ -3,8 +3,9 @@ const completeBtn = document.querySelector('.todo__complete');
 const editBtn = document.querySelector('.todo__edit');
 const deleteBtn = document.querySelector('.todo__delete');
 const mainToDoList = document.querySelector('.todo__main__list');
-const todoList = document.querySelector('.todo__list')
-const todoText = document.querySelector('.todo__text')
+const todoList = document.querySelector('.todo__list');
+const todoText = document.querySelector('.todo__text');
+const editToDoList = document.querySelector('.todo__edit__list');
 
 const state = {
   todos: [],
@@ -17,9 +18,19 @@ const completeToDo = function(btn) {
 };
 
 const editToDo = function(btn) {
-  console.log(btn.parentElement.innerText) // Get the text from LI
+  const text = btn.parentElement.innerText;
   // Open a new input box with save and close button
+  renderEditInput(text)
 };
+
+const renderEditInput = function(text) {
+  const html = `
+      <input type="text" class="todo__edit--list" placeholder="${text}">
+      <button class="todo__edit-btn todo__save__edit"><i class="fas fa-save"></i></button>
+      <button class="todo__edit-btn todo__cancel__edit"><i class="fas fa-window-close"></i></button>
+  `
+  editToDoList.insertAdjacentHTML('beforeend', html)
+}
 
 const deleteToDo = function(btn) {
   btn.parentElement.remove();
@@ -48,6 +59,13 @@ todoList.addEventListener('click', (e) => {
   if (btn.classList.contains('todo__complete')) completeToDo(btn);
 });
 
+editToDoList.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return
+  if (btn.classList.contains('todo__save__edit')) console.log('save the edit')
+  if (btn.classList.contains('todo__cancel__edit')) console.log('cancel the edit')
+})
+
 const renderNewTodo = function(todo) {
   const html = `
     <li>
@@ -60,11 +78,3 @@ const renderNewTodo = function(todo) {
   todoList.insertAdjacentHTML('beforeend', html)
 }
 
-// Add event listener to each btn
-// It's better to use event bubbling hear.
-// completeBtn.forEach((item, index) => {
-//   item.addEventListener('click', () => {
-//     state.currentCompleteBtnIndex = index;
-//     completeToDo()
-//   });
-// });

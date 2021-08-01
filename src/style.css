@@ -99,3 +99,30 @@ body {
 .line-through {
   text-decoration: line-through;
 }
+
+.todo__edit__list {
+  height: 2.4rem;
+}
+
+.todo__edit__list input {
+  padding: .3rem;
+  width: 16rem;
+  height: 100%;
+  line-height: 2.4rem;
+  padding-left: .5rem;
+}
+
+.todo__edit-btn {
+  height: 100%;
+  width: 30px;
+  font-size: 1.2rem;
+  color: aliceblue;
+}
+
+.todo__save__edit {
+  background-color: green;
+}
+
+.todo__cancel__edit {
+  background-color: red;
+}
