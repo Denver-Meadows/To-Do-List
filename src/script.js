@@ -7,6 +7,12 @@ const todoList = document.querySelector('.todo__list');
 const todoText = document.querySelector('.todo__text');
 const editToDoList = document.querySelector('.todo__edit__list');
 
+
+// a better way to render could be looping through the todos and then displaying the HTML.
+// Then when i edit a todo, we update the entire todo list and re-render
+// save todo's with an id, then edit and update the id
+
+
 const state = {
   todos: [],
   completedToDo: [],
@@ -21,11 +27,13 @@ const editToDo = function(btn) {
   const text = btn.parentElement.innerText;
   // Open a new input box with save and close button
   renderEditInput(text)
+
+  // call function that gets the new text from the edit and replaces the attached btn text.
 };
 
 const renderEditInput = function(text) {
   const html = `
-      <input type="text" class="todo__edit--list" placeholder="${text}">
+      <input type="text" class="todo__edit__input" placeholder="${text}">
       <button class="todo__edit-btn todo__save__edit"><i class="fas fa-save"></i></button>
       <button class="todo__edit-btn todo__cancel__edit"><i class="fas fa-window-close"></i></button>
   `
@@ -39,6 +47,20 @@ const deleteToDo = function(btn) {
   // Remove todo from state
   state.todos = state.todos.filter(item => item !== removedToDo)
 };
+
+const cancelEdit = function(btn) {
+  btn.parentElement.remove();
+};
+
+const saveEdit = function(btn) {
+  const text = document.querySelector('.todo__edit__input').value;
+
+  updateEditedToDo(text)
+}
+
+const updateEditedToDo = function(text) {
+  console.log(text)
+} 
 
 // Add new todo
 addToDoBtn.addEventListener('click', (e) => {
@@ -62,8 +84,8 @@ todoList.addEventListener('click', (e) => {
 editToDoList.addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn) return
-  if (btn.classList.contains('todo__save__edit')) console.log('save the edit')
-  if (btn.classList.contains('todo__cancel__edit')) console.log('cancel the edit')
+  if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
+  if (btn.classList.contains('todo__cancel__edit')) cancelEdit(btn);
 })
 
 const renderNewTodo = function(todo) {
