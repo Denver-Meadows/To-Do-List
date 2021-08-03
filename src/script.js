@@ -7,6 +7,8 @@ const todoList = document.querySelector('.todo__list');
 const todoText = document.querySelector('.todo__text');
 const editToDoList = document.querySelector('.todo__edit__list');
 
+// Need to keep the completed class when re-rendering on add and edit
+
 const state = {
   todos: [],
   completedToDo: [],

@@ -8,7 +8,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: rgb(233, 165, 116);
+  background-image: linear-gradient(rgb(106, 105, 151), rgb(184, 217, 228));
+  height: 100vh;
 }
 
 .todo__header {
