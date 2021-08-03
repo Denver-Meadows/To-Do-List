@@ -11,7 +11,7 @@ const state = {
   todos: [],
   completedToDo: [],
   todoEdit: '',
-}
+};
 
 const completeToDo = function(btn) {
   btn.parentNode.classList.toggle('line-through');
@@ -62,26 +62,10 @@ addToDoBtn.addEventListener('click', (e) => {
   const value = document.querySelector('.todo__form__input').value
   state.todos.push(value)
   todoList.innerHTML = '';
-  renderNewTodo(value)
+  renderNewTodo(state.todos)
 
   document.querySelector('.todo__form__input').value = ''
 });
-
-// Event bubbling for todo buttons
-todoList.addEventListener('click', (e) => {
-  const btn = e.target.closest('button')
-  if (!btn) return;
-  if (btn.classList.contains('todo__delete')) deleteToDo(btn);
-  if (btn.classList.contains('todo__edit')) editToDo(btn);
-  if (btn.classList.contains('todo__complete')) completeToDo(btn);
-});
-
-editToDoList.addEventListener('click', (e) => {
-  const btn = e.target.closest('button');
-  if (!btn) return
-  if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
-  if (btn.classList.contains('todo__cancel__edit')) cancelEdit(btn);
-})
 
 const renderNewTodo = function(todo) {
   if (state.todos.length >= 1) {
@@ -99,3 +83,22 @@ const renderNewTodo = function(todo) {
   }
 };
 
+const init = function() {
+  // Event bubbling for todo buttons
+  todoList.addEventListener('click', (e) => {
+    const btn = e.target.closest('button')
+    if (!btn) return;
+    if (btn.classList.contains('todo__delete')) deleteToDo(btn);
+    if (btn.classList.contains('todo__edit')) editToDo(btn);
+    if (btn.classList.contains('todo__complete')) completeToDo(btn);
+  });
+
+  editToDoList.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return
+    if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
+    if (btn.classList.contains('todo__cancel__edit')) cancelEdit(btn);
+  });
+}
+
+init();
