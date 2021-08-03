@@ -7,15 +7,10 @@ const todoList = document.querySelector('.todo__list');
 const todoText = document.querySelector('.todo__text');
 const editToDoList = document.querySelector('.todo__edit__list');
 
-
-// a better way to render could be looping through the todos and then displaying the HTML.
-// Then when i edit a todo, we update the entire todo list and re-render
-// save todo's with an id, then edit and update the id
-
-
 const state = {
   todos: [],
   completedToDo: [],
+  todoEdit: '',
 }
 
 const completeToDo = function(btn) {
@@ -25,10 +20,9 @@ const completeToDo = function(btn) {
 
 const editToDo = function(btn) {
   const text = btn.parentElement.innerText;
-  // Open a new input box with save and close button
   renderEditInput(text)
 
-  // call function that gets the new text from the edit and replaces the attached btn text.
+  state.todoEdit = text
 };
 
 const renderEditInput = function(text) {
@@ -54,21 +48,22 @@ const cancelEdit = function(btn) {
 
 const saveEdit = function(btn) {
   const text = document.querySelector('.todo__edit__input').value;
+ 
+  state.todos.splice(state.todos.indexOf(state.todoEdit), 1, text) // replace with new text value
 
-  updateEditedToDo(text)
+  btn.parentElement.remove();
+  todoList.innerHTML = '';
+  renderNewTodo(state.todos)
 }
-
-const updateEditedToDo = function(text) {
-  console.log(text)
-} 
 
 // Add new todo
 addToDoBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const value = document.querySelector('.todo__form__input').value
   state.todos.push(value)
+  todoList.innerHTML = '';
   renderNewTodo(value)
-  console.log(state.todos)
+
   document.querySelector('.todo__form__input').value = ''
 });
 
@@ -89,14 +84,18 @@ editToDoList.addEventListener('click', (e) => {
 })
 
 const renderNewTodo = function(todo) {
-  const html = `
-    <li>
-      <span class="todo__text">${todo}</span>
-      <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
-      <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
-      <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
-    </li>
-  `
-  todoList.insertAdjacentHTML('beforeend', html)
-}
+  if (state.todos.length >= 1) {
+    state.todos.forEach(todo => {
+      const html = `
+        <li>
+          <span class="todo__text">${todo}</span>
+          <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
+          <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
+          <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
+        </li>
+      `
+      todoList.insertAdjacentHTML('beforeend', html)
+    })
+  }
+};
 
