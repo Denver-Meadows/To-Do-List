@@ -20,16 +20,21 @@ const completeToDo = function(btn) {
 
 const editToDo = function(btn) {
   const text = btn.parentElement.innerText;
+  console.log(text)
+  console.log('click')
   renderEditInput(text)
 
   state.todoEdit = text
+  console.log(state.todoEdit)
 };
 
 const renderEditInput = function(text) {
   const html = `
+    <div class="todo__edit__list">
       <input type="text" class="todo__edit__input" placeholder="${text}">
       <button class="todo__edit-btn todo__save__edit"><i class="fas fa-save"></i></button>
       <button class="todo__edit-btn todo__cancel__edit"><i class="fas fa-window-close"></i></button>
+    </div>
   `
   editToDoList.insertAdjacentHTML('beforeend', html)
 }
@@ -85,7 +90,7 @@ const renderNewTodo = function(todo) {
 
 const init = function() {
   // Event bubbling for todo buttons
-  todoList.addEventListener('click', (e) => {
+  mainToDoList.addEventListener('click', (e) => {
     const btn = e.target.closest('button')
     if (!btn) return;
     if (btn.classList.contains('todo__delete')) deleteToDo(btn);
