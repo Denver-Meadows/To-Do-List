@@ -6,8 +6,7 @@ const mainToDoList = document.querySelector('.todo__main__list');
 const todoList = document.querySelector('.todo__list');
 const todoText = document.querySelector('.todo__text');
 const editToDoList = document.querySelector('.todo__edit__list');
-
-// Need to keep the completed class when re-rendering on add and edit
+const todoDropDownList = document.querySelector('.todo__dropdown__list');
 
 const state = {
   todos: [],
@@ -83,20 +82,27 @@ addToDoBtn.addEventListener('click', (e) => {
 });
 
 const renderTodos = function() {
+  renderNeedTodos();
+  renderCompletedTodos();
+};
+
+const renderNeedTodos = function() {
   if (state.todos.length >= 1) {
     state.todos.forEach(todo => {
       const html = todoHTML(todo)
       todoList.insertAdjacentHTML('beforeend', html)
     })
   }
+};
 
+const renderCompletedTodos = function() {
   if (state.completedToDo.length >= 1) {
     state.completedToDo.forEach(todo => {
       const html = completedTodoHTML(todo)
       todoList.insertAdjacentHTML('beforeend', html)
     })
   }
-};
+}
 
 const todoHTML = function(todo) {
   return `
@@ -137,5 +143,15 @@ const init = function() {
     if (btn.classList.contains('todo__cancel__edit')) cancelEdit(btn);
   });
 }
+
+todoDropDownList.addEventListener('change', (e) => {
+  todoList.innerHTML = '';
+  if (todoDropDownList.value === 'Uncompleted') renderNeedTodos();
+  if (todoDropDownList.value === 'Completed') renderCompletedTodos();
+  if (todoDropDownList.value === 'All') {
+    renderNeedTodos();
+    renderCompletedTodos();
+  }
+})
 
 init();
