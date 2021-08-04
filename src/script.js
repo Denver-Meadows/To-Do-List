@@ -16,7 +16,36 @@ const state = {
 };
 
 const completeToDo = function(btn) {
-  btn.parentNode.classList.toggle('line-through');
+  const text = btn.parentElement.innerText
+
+  // if line-through class
+  console.log(btn.parentElement.classList.contains('line-through'))
+
+  if (!btn.parentElement.classList.contains('line-through')) {
+    btn.parentNode.classList.toggle('line-through'); 
+    state.todos = state.todos.filter(item => item !== text) // remove from todos
+    state.completedToDo.push(text)
+  } else {
+    btn.parentNode.classList.toggle('line-through'); 
+    state.todos.push(text)
+    state.completedToDo = state.completedToDo.filter(item => item !== text);
+  };
+
+  console.log(state.todos)
+  console.log(`completed ${state.completedToDo}`)
+
+  
+
+  // remove from todos
+
+  // add to completed
+
+  // if no line-through class
+
+  // remove from completed
+
+  // add to todos
+  
   // state.completedToDo.push(btn.closest('.todo__text'));  ***NOT WORKING
 };
 
@@ -60,7 +89,7 @@ const saveEdit = function(btn) {
 
   btn.parentElement.remove();
   todoList.innerHTML = '';
-  renderNewTodo(state.todos)
+  renderTodos(state.todos)
 }
 
 // Add new todo
@@ -69,12 +98,12 @@ addToDoBtn.addEventListener('click', (e) => {
   const value = document.querySelector('.todo__form__input').value
   state.todos.push(value)
   todoList.innerHTML = '';
-  renderNewTodo(state.todos)
+  renderTodos(state.todos)
 
   document.querySelector('.todo__form__input').value = ''
 });
 
-const renderNewTodo = function(todo) {
+const renderTodos = function(todo) {
   if (state.todos.length >= 1) {
     state.todos.forEach(todo => {
       const html = `
