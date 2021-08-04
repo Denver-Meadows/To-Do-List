@@ -18,9 +18,7 @@ const state = {
 const completeToDo = function(btn) {
   const text = btn.parentElement.innerText
 
-  // if line-through class
-  console.log(btn.parentElement.classList.contains('line-through'))
-
+  // Move completed items from todos to completedToDo and vice-versa
   if (!btn.parentElement.classList.contains('line-through')) {
     btn.parentNode.classList.toggle('line-through'); 
     state.todos = state.todos.filter(item => item !== text) // remove from todos
@@ -30,33 +28,13 @@ const completeToDo = function(btn) {
     state.todos.push(text)
     state.completedToDo = state.completedToDo.filter(item => item !== text);
   };
-
-  console.log(state.todos)
-  console.log(`completed ${state.completedToDo}`)
-
-  
-
-  // remove from todos
-
-  // add to completed
-
-  // if no line-through class
-
-  // remove from completed
-
-  // add to todos
-  
-  // state.completedToDo.push(btn.closest('.todo__text'));  ***NOT WORKING
 };
 
 const editToDo = function(btn) {
   const text = btn.parentElement.innerText;
-  console.log(text)
-  console.log('click')
   renderEditInput(text)
 
   state.todoEdit = text
-  console.log(state.todoEdit)
 };
 
 const renderEditInput = function(text) {
@@ -75,7 +53,8 @@ const deleteToDo = function(btn) {
   const removedToDo = btn.parentNode.innerText.trim()
 
   // Remove todo from state
-  state.todos = state.todos.filter(item => item !== removedToDo)
+  state.todos = state.todos.filter(item => item !== removedToDo);
+  state.completedToDo = state.completedToDo.filter(item => item !== removedToDo)
 };
 
 const cancelEdit = function(btn) {
@@ -102,22 +81,6 @@ addToDoBtn.addEventListener('click', (e) => {
 
   document.querySelector('.todo__form__input').value = ''
 });
-
-// const renderTodos = function() {
-//   if (state.todos.length >= 1) {
-//     state.todos.forEach(todo => {
-//       const html = `
-//         <li>
-//           <span class="todo__text">${todo}</span>
-//           <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
-//           <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
-//           <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
-//         </li>
-//       `
-//       todoList.insertAdjacentHTML('beforeend', html)
-//     })
-//   }
-// };
 
 const renderTodos = function() {
   if (state.todos.length >= 1) {
