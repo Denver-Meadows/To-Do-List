@@ -103,21 +103,59 @@ addToDoBtn.addEventListener('click', (e) => {
   document.querySelector('.todo__form__input').value = ''
 });
 
-const renderTodos = function(todo) {
+// const renderTodos = function() {
+//   if (state.todos.length >= 1) {
+//     state.todos.forEach(todo => {
+//       const html = `
+//         <li>
+//           <span class="todo__text">${todo}</span>
+//           <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
+//           <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
+//           <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
+//         </li>
+//       `
+//       todoList.insertAdjacentHTML('beforeend', html)
+//     })
+//   }
+// };
+
+const renderTodos = function() {
   if (state.todos.length >= 1) {
     state.todos.forEach(todo => {
-      const html = `
-        <li>
-          <span class="todo__text">${todo}</span>
-          <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
-          <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
-          <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
-        </li>
-      `
+      const html = todoHTML(todo)
+      todoList.insertAdjacentHTML('beforeend', html)
+    })
+  }
+
+  if (state.completedToDo.length >= 1) {
+    state.completedToDo.forEach(todo => {
+      const html = completedTodoHTML(todo)
       todoList.insertAdjacentHTML('beforeend', html)
     })
   }
 };
+
+const todoHTML = function(todo) {
+  return `
+    <li>
+      <span class="todo__text">${todo}</span>
+      <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
+      <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
+      <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
+    </li>
+  `
+}
+
+const completedTodoHTML = function(todo) {
+  return `
+    <li class="line-through">
+      <span class="todo__text">${todo}</span>
+      <button class="todo__button todo__delete"><i class="fas fa-trash"></i></button>
+      <button class="todo__button todo__edit"><i class="fas fa-edit"></i></button>
+      <button class="todo__button todo__complete"><i class="fas fa-check"></i></button>
+    </li>
+  `
+}
 
 const init = function() {
   // Event bubbling for todo buttons
