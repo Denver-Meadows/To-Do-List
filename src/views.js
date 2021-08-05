@@ -51,4 +51,12 @@ export const renderCompletedTodos = function(data) {
       todoList.insertAdjacentHTML('beforeend', html)
     })
   }
+};
+
+export const clearTodoListHTML = function() {
+  todoList.innerHTML = '';
+};
+
+export const clearTodoFormInput = function() {
+  document.querySelector('.todo__form__input').value = ''
 }

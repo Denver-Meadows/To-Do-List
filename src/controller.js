@@ -3,7 +3,6 @@ import * as views from './views.js';
 
 const addToDoBtn = document.querySelector('.todo__form__button');
 const mainToDoList = document.querySelector('.todo__main__list');
-const todoList = document.querySelector('.todo__list');
 const editToDoList = document.querySelector('.todo__edit__list');
 const todoDropDownList = document.querySelector('.todo__dropdown__list');
 
@@ -13,19 +12,17 @@ const editToDo = function(btn) {
 
 const saveEdit = function(btn) {
   model.getDataForSaveEdit(btn);
-  todoList.innerHTML = '';
+  views.clearTodoListHTML();
   renderTodos(model.state.todos)
 }
 
 // Add new todo
 addToDoBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  const value = document.querySelector('.todo__form__input').value
-  model.state.todos.push(value)
-  todoList.innerHTML = '';
+  model.getAddTodoData();
+  views.clearTodoListHTML();
   renderTodos(model.state.todos)
-
-  document.querySelector('.todo__form__input').value = ''
+  views.clearTodoFormInput();
 });
 
 const renderTodos = function() {
@@ -33,12 +30,7 @@ const renderTodos = function() {
   views.renderCompletedTodos(model.state.completedToDo);
 };
 
-
-
 const init = function() {
-
-  console.log(model.state.test)
-  // Event bubbling for todo buttons
   mainToDoList.addEventListener('click', (e) => {
     const btn = e.target.closest('button')
     if (!btn) return;
@@ -56,7 +48,7 @@ const init = function() {
 }
 
 todoDropDownList.addEventListener('change', (e) => {
-  todoList.innerHTML = '';
+  views.clearTodoListHTML();
   if (todoDropDownList.value === 'Uncompleted') views.renderNeedTodos(model.state.todos);
   if (todoDropDownList.value === 'Completed') views.renderCompletedTodos(model.state.completedToDo);
   if (todoDropDownList.value === 'All') {
