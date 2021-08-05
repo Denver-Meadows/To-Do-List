@@ -8,20 +8,11 @@ const editToDoList = document.querySelector('.todo__edit__list');
 const todoDropDownList = document.querySelector('.todo__dropdown__list');
 
 const editToDo = function(btn) {
-  const text = model.getEditTodoText(btn);
-  views.renderEditInput(text)
-};
-
-const cancelEdit = function(btn) {
-  btn.parentElement.remove();
+  views.renderEditInput(model.getEditTodoText(btn))
 };
 
 const saveEdit = function(btn) {
-  const text = document.querySelector('.todo__edit__input').value;
- 
-  model.state.todos.splice(model.state.todos.indexOf(model.state.todoEdit), 1, text) // replace with new text value
-
-  btn.parentElement.remove();
+  model.getDataForSaveEdit(btn);
   todoList.innerHTML = '';
   renderTodos(model.state.todos)
 }
@@ -38,27 +29,9 @@ addToDoBtn.addEventListener('click', (e) => {
 });
 
 const renderTodos = function() {
-  renderNeedTodos();
-  renderCompletedTodos();
+  views.renderNeedTodos(model.state.todos);
+  views.renderCompletedTodos(model.state.completedToDo);
 };
-
-const renderNeedTodos = function() {
-  if (model.state.todos.length >= 1) {
-    model.state.todos.forEach(todo => {
-      const html = views.todoHTML(todo)
-      todoList.insertAdjacentHTML('beforeend', html)
-    })
-  }
-};
-
-const renderCompletedTodos = function() {
-  if (model.state.completedToDo.length >= 1) {
-    model.state.completedToDo.forEach(todo => {
-      const html = views.completedTodoHTML(todo)
-      todoList.insertAdjacentHTML('beforeend', html)
-    })
-  }
-}
 
 
 
@@ -78,17 +51,17 @@ const init = function() {
     const btn = e.target.closest('button');
     if (!btn) return
     if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
-    if (btn.classList.contains('todo__cancel__edit')) cancelEdit(btn);
+    if (btn.classList.contains('todo__cancel__edit')) model.cancelEdit(btn);
   });
 }
 
 todoDropDownList.addEventListener('change', (e) => {
   todoList.innerHTML = '';
-  if (todoDropDownList.value === 'Uncompleted') renderNeedTodos();
-  if (todoDropDownList.value === 'Completed') renderCompletedTodos();
+  if (todoDropDownList.value === 'Uncompleted') views.renderNeedTodos(model.state.todos);
+  if (todoDropDownList.value === 'Completed') views.renderCompletedTodos(model.state.completedToDo);
   if (todoDropDownList.value === 'All') {
-    renderNeedTodos();
-    renderCompletedTodos();
+    views.renderNeedTodos(model.state.todos);
+    views.renderCompletedTodos(model.state.completedToDo);
   }
 })
 

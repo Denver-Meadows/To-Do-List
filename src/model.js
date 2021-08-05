@@ -33,3 +33,13 @@ export const getEditTodoText = function (btn) {
   state.todoEdit = text
   return text
 }
+
+export const cancelEdit = function(btn) {
+  btn.parentElement.remove();
+};
+
+export const getDataForSaveEdit = function (btn) {
+  const text = document.querySelector('.todo__edit__input').value;
+  state.todos.splice(state.todos.indexOf(state.todoEdit), 1, text) // replace with new text value
+  btn.parentElement.remove();
+}

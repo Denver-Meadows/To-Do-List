@@ -1,5 +1,8 @@
+const editToDoList = document.querySelector('.todo__edit__list');
+const todoList = document.querySelector('.todo__list');
+
 export const renderEditInput = function(text) {
-  const editToDoList = document.querySelector('.todo__edit__list');
+  
   const html = `
     <div class="todo__edit__list">
       <input type="text" class="todo__edit__input" placeholder="${text}">
@@ -31,3 +34,21 @@ export const completedTodoHTML = function(todo) {
     </li>
   `
 };
+
+export const renderNeedTodos = function(data) {
+  if (data.length >= 1) {
+    data.forEach(todo => {
+      const html = todoHTML(todo)
+      todoList.insertAdjacentHTML('beforeend', html)
+    })
+  }
+};
+
+export const renderCompletedTodos = function(data) {
+  if (data.length >= 1) {
+    data.forEach(todo => {
+      const html = completedTodoHTML(todo)
+      todoList.insertAdjacentHTML('beforeend', html)
+    })
+  }
+}
