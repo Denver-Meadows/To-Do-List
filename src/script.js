@@ -8,6 +8,8 @@ const todoText = document.querySelector('.todo__text');
 const editToDoList = document.querySelector('.todo__edit__list');
 const todoDropDownList = document.querySelector('.todo__dropdown__list');
 
+
+// Model 
 const state = {
   todos: [],
   completedToDo: [],
@@ -45,7 +47,7 @@ const renderEditInput = function(text) {
     </div>
   `
   editToDoList.insertAdjacentHTML('beforeend', html)
-}
+};
 
 const deleteToDo = function(btn) {
   btn.parentElement.remove();
