@@ -14,7 +14,12 @@ const saveEdit = function(btn) {
   model.getDataForSaveEdit(btn);
   views.clearTodoListHTML();
   renderTodos(model.state.todos)
-}
+};
+
+const renderTodos = function() {
+  views.renderNeedTodos(model.state.todos);
+  views.renderCompletedTodos(model.state.completedToDo);
+};
 
 // Add new todo
 addToDoBtn.addEventListener('click', (e) => {
@@ -25,36 +30,39 @@ addToDoBtn.addEventListener('click', (e) => {
   views.clearTodoFormInput();
 });
 
-const renderTodos = function() {
-  views.renderNeedTodos(model.state.todos);
-  views.renderCompletedTodos(model.state.completedToDo);
+const controlMainTodoListBtn = function(btn) {
+  if (btn.classList.contains('todo__delete')) model.deleteToDo(btn);
+  if (btn.classList.contains('todo__edit')) editToDo(btn);
+  if (btn.classList.contains('todo__complete')) model.completeToDo(btn);
 };
 
-const init = function() {
-  mainToDoList.addEventListener('click', (e) => {
-    const btn = e.target.closest('button')
-    if (!btn) return;
-    if (btn.classList.contains('todo__delete')) model.deleteToDo(btn);
-    if (btn.classList.contains('todo__edit')) editToDo(btn);
-    if (btn.classList.contains('todo__complete')) model.completeToDo(btn);
-  });
+const controlEditTodoListBtn = function(btn) {
+  if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
+  if (btn.classList.contains('todo__cancel__edit')) model.cancelEdit(btn);
+};
 
-  editToDoList.addEventListener('click', (e) => {
-    const btn = e.target.closest('button');
-    if (!btn) return
-    if (btn.classList.contains('todo__save__edit')) saveEdit(btn);
-    if (btn.classList.contains('todo__cancel__edit')) model.cancelEdit(btn);
-  });
-}
-
-todoDropDownList.addEventListener('change', (e) => {
-  views.clearTodoListHTML();
-  if (todoDropDownList.value === 'Uncompleted') views.renderNeedTodos(model.state.todos);
-  if (todoDropDownList.value === 'Completed') views.renderCompletedTodos(model.state.completedToDo);
-  if (todoDropDownList.value === 'All') {
+const controlTodoDropDownListChange = function(value) {
+  if (value === 'Uncompleted') views.renderNeedTodos(model.state.todos);
+  if (value === 'Completed') views.renderCompletedTodos(model.state.completedToDo);
+  if (value === 'All') {
     views.renderNeedTodos(model.state.todos);
     views.renderCompletedTodos(model.state.completedToDo);
   }
-})
+};
+
+const init = function() {
+  views.mainTodoListBtnHandler(controlMainTodoListBtn)
+  views.editTodoListBtnHandler(controlEditTodoListBtn)
+  views.todoDropDownListHandler(controlTodoDropDownListChange)
+};
+
+// mainToDoList.addEventListener('click', (e) => {
+//   const btn = e.target.closest('button')
+//   if (!btn) return;
+//   if (btn.classList.contains('todo__delete')) model.deleteToDo(btn);
+//   if (btn.classList.contains('todo__edit')) editToDo(btn);
+//   if (btn.classList.contains('todo__complete')) model.completeToDo(btn);
+// });
+
 
 init();

@@ -1,5 +1,8 @@
 const editToDoList = document.querySelector('.todo__edit__list');
 const todoList = document.querySelector('.todo__list');
+const addToDoBtn = document.querySelector('.todo__form__button');
+const mainToDoList = document.querySelector('.todo__main__list');
+const todoDropDownList = document.querySelector('.todo__dropdown__list');
 
 export const renderEditInput = function(text) {
   
@@ -59,4 +62,28 @@ export const clearTodoListHTML = function() {
 
 export const clearTodoFormInput = function() {
   document.querySelector('.todo__form__input').value = ''
-}
+};
+
+export const mainTodoListBtnHandler = function(handler) {
+  mainToDoList.addEventListener('click', (e) => {
+    const btn = e.target.closest('button')
+    if (!btn) return;
+    handler(btn);
+  })
+};
+
+export const editTodoListBtnHandler = function(handler) {
+  editToDoList.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    handler(btn);
+  })
+};
+
+export const todoDropDownListHandler = function(handler) {
+  todoDropDownList.addEventListener('change', ()=> {
+    clearTodoListHTML();
+    const value = todoDropDownList.value
+    handler(value);
+  });
+};
