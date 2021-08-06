@@ -3,6 +3,7 @@ const todoList = document.querySelector('.todo__list');
 const addToDoBtn = document.querySelector('.todo__form__button');
 const mainToDoList = document.querySelector('.todo__main__list');
 const todoDropDownList = document.querySelector('.todo__dropdown__list');
+export const todoEditInput = document.querySelector('.todo__edit__input')
 
 export const renderEditInput = function(text) {
   

@@ -7,7 +7,7 @@ export const state = {
 
 export const completeToDo = function(btn) {
   const text = btn.parentElement.innerText
-  // Move completed items from todos to completedToDo and vice-versa
+  // Move completed items from todos to the completedToDo and vice-versa
   if (!btn.parentElement.classList.contains('line-through')) {
     btn.parentNode.classList.toggle('line-through'); 
     state.todos = state.todos.filter(item => item !== text) // remove from todos
