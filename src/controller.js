@@ -2,25 +2,23 @@ import * as model from './model.js';
 import * as views from './views.js';
 
 const editToDo = function(btn) {
+  if (btn.parentElement.classList.contains('line-through')) return;
   views.renderEditInput(model.getEditTodoText(btn))
 };
 
 const saveEdit = function(btn) {
   model.getDataForSaveEdit(btn);
   views.clearTodoListHTML();
-  renderTodos(model.state.todos)
+  views.renderNeedTodos(model.state.todos);
+  views.renderCompletedTodos(model.state.completedToDo);
 };
 
 const controlAddToDo = function() {
   model.getAddTodoData();
   views.clearTodoListHTML();
-  renderTodos(model.state.todos)
-  views.clearTodoFormInput();
-};
-
-const renderTodos = function() {
   views.renderNeedTodos(model.state.todos);
   views.renderCompletedTodos(model.state.completedToDo);
+  views.clearTodoFormInput();
 };
 
 const controlMainTodoListBtn = function(btn) {

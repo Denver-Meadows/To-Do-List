@@ -88,7 +88,6 @@ export const todoDropDownListHandler = function(handler) {
   });
 };
 
-
 export const addToDoBtnHandler = function(handler) {
   addToDoBtn.addEventListener('click', (e)=> {
     e.preventDefault();
