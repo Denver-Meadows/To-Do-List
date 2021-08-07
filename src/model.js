@@ -46,5 +46,6 @@ export const getDataForSaveEdit = function (btn) {
 
 export const getAddTodoData = function() {
   const value = document.querySelector('.todo__form__input').value
+  if (value === '') return;
   state.todos.push(value) 
 }
