@@ -1,19 +1,19 @@
 import * as model from './model.js';
 import * as views from './views.js';
 
-const saveEdit = function(btn) {
-  model.getDataForSaveEdit(btn);
-  views.clearTodoListHTML();
-  views.renderNeedTodos(model.state.todos);
-  views.renderCompletedTodos(model.state.completedToDo);
-};
-
 const controlAddToDo = function() {
   model.getAddTodoData();
   views.clearTodoListHTML();
   views.renderNeedTodos(model.state.todos);
   views.renderCompletedTodos(model.state.completedToDo);
   views.clearTodoFormInput();
+};
+
+const saveEdit = function(btn) {
+  model.getDataForSaveEdit(btn);
+  views.clearTodoListHTML();
+  views.renderNeedTodos(model.state.todos);
+  views.renderCompletedTodos(model.state.completedToDo);
 };
 
 const editToDo = function(btn) {

@@ -1,9 +1,7 @@
-const editToDoList = document.querySelector('.todo__edit__list');
 const todoList = document.querySelector('.todo__list');
 const addToDoBtn = document.querySelector('.todo__form__button');
 const mainToDoList = document.querySelector('.todo__main__list');
 const todoDropDownList = document.querySelector('.todo__dropdown__list');
-export const todoEditInput = document.querySelector('.todo__edit__input')
 
 export const renderEditInput = function(text) {
   const html = `
@@ -56,6 +54,7 @@ export const renderCompletedTodos = function(data) {
   }
 };
 
+
 export const clearTodoListHTML = function() {
   todoList.innerHTML = '';
 };
@@ -63,6 +62,8 @@ export const clearTodoListHTML = function() {
 export const clearTodoFormInput = function() {
   document.querySelector('.todo__form__input').value = ''
 };
+
+
 
 export const mainTodoListBtnHandler = function(handler) {
   mainToDoList.addEventListener('click', (e) => {
@@ -73,7 +74,6 @@ export const mainTodoListBtnHandler = function(handler) {
 };
 
 export const editTodoListBtnHandler = function(handler) {
-  //changed editToDoList to main
   mainToDoList.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return;
@@ -94,4 +94,4 @@ export const addToDoBtnHandler = function(handler) {
     e.preventDefault();
     handler();
   })
-}
+};
