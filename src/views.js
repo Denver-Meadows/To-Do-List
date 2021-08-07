@@ -6,15 +6,14 @@ const todoDropDownList = document.querySelector('.todo__dropdown__list');
 export const todoEditInput = document.querySelector('.todo__edit__input')
 
 export const renderEditInput = function(text) {
-  
   const html = `
-    <div class="todo__edit__list">
+    <div class="todo__edit__list getitman">
       <input type="text" class="todo__edit__input" placeholder="${text}">
       <button class="todo__edit-btn todo__save__edit"><i class="fas fa-save"></i></button>
       <button class="todo__edit-btn todo__cancel__edit"><i class="fas fa-window-close"></i></button>
     </div>
   `
-  editToDoList.insertAdjacentHTML('beforeend', html)
+  mainToDoList.insertAdjacentHTML('beforeend', html)
 };
 
 export const todoHTML = function(todo) {
@@ -74,7 +73,8 @@ export const mainTodoListBtnHandler = function(handler) {
 };
 
 export const editTodoListBtnHandler = function(handler) {
-  editToDoList.addEventListener('click', (e) => {
+  //changed editToDoList to main
+  mainToDoList.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return;
     handler(btn);

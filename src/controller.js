@@ -1,14 +1,6 @@
 import * as model from './model.js';
 import * as views from './views.js';
 
-// Bug with accepting no text as todo -- And allows multiple edit screens.
-
-const editToDo = function(btn) {
-  if (btn.parentElement.classList.contains('line-through')) return;
-  console.log(views.todoEditInput === null)
-  views.renderEditInput(model.getEditTodoText(btn))
-};
-
 const saveEdit = function(btn) {
   model.getDataForSaveEdit(btn);
   views.clearTodoListHTML();
@@ -22,6 +14,12 @@ const controlAddToDo = function() {
   views.renderNeedTodos(model.state.todos);
   views.renderCompletedTodos(model.state.completedToDo);
   views.clearTodoFormInput();
+};
+
+const editToDo = function(btn) {
+  if (btn.parentElement.classList.contains('line-through')) return;
+  if (btn.parentElement.parentElement.nextElementSibling !== null) return;
+  views.renderEditInput(model.getEditTodoText(btn))
 };
 
 const controlMainTodoListBtn = function(btn) {
